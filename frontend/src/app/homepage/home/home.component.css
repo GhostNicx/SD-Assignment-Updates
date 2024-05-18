@@ -1,0 +1,78 @@
+/* Navbar */
+.navbar {
+    background-color: #333; /* Set background color */
+    color: gold; /* Set text color */
+    padding: 10px; /* Add padding */
+    display: flex; /* Make it a flex container */
+    justify-content: space-between; /* Space items evenly */
+    align-items: center; /* Center items vertically */
+  }
+  .homepage-container > .navclass{
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  
+  .navbar-brand {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  
+  .stack, .underflow {
+    font-weight: bold;
+  }
+  
+  .stack {
+    color: gold;
+  }
+  
+  .underflow {
+    color: red;
+  }
+  
+  /* Spacer */
+  .spacer {
+    flex: 1;
+  }
+  
+  /* Button */
+  button {
+    background-color: white; /* Set background color */
+    color: blue; /* Set text color */
+    text-transform: uppercase; /* Uppercase text */
+    margin-left: 8px; /* Add margin */;
+  }
+  
+  button.active {
+    font-weight: bold;
+  }
+  
+  button:hover {
+    background-color: gold; /* Change background color on hover */
+  }
+  
+  
+  /* Navbar Logo */
+  .navbar-logo {
+    width: 40px; /* Adjust the width of the logo */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Add space between the logo and the navbar brand */
+  }
+  
+  /* Homepage Container */
+  .homepage-container {
+    background-image: url('../../../assets/images/background.jpg');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; /* Set the height to cover the entire viewport */
+    display: flex; /* Use flexbox to center content */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+  }
+  
+  /* Stack Underflow text */
+  .stack-underflow {
+    font-size: 48px; /* Adjust font size */
+  }
+

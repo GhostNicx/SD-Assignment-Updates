@@ -1,0 +1,36 @@
+<div class="container">
+  <h1>Questions Page</h1>
+
+  <div>
+    {{ crtUser.username }}
+  </div>
+
+  <!-- Form to add a new question -->
+  <form id="questionForm" class="d-flex flex-column">
+    <mat-form-field appearance="fill">
+      <mat-label>Question Title</mat-label>
+      <input matInput placeholder="Question Title" />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint *ngIf>Hint</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>questionDescription</mat-label>
+      <input matInput placeholder="Question Description" />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint *ngIf>Hint</mat-hint>
+    </mat-form-field>
+  </form>
+
+  <!-- Displaying the questions -->
+  <div *ngFor="let question of questions" class="question">
+    <h2>{{ question.title }}</h2>
+    <p class="user-info">User: {{crtUser.username}}  Posted on: {{formatedDate(question.creationDate)}}</p>
+    <p>{{ question.question }}</p>
+    <button (click)="toggleAnswer(question)">Show Answer</button>
+    <p class="answer" [style.display]="question.showAnswer ? 'block' : 'none'">
+      Answer: {{ question.answer }}
+    </p>
+  </div>
+
+</div>
