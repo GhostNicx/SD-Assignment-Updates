@@ -19,11 +19,14 @@ public class User {
     private String username;
     @Column(name = "password")
     private String password;
-    @Column(name = "role")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "score")
+    private double score = 0;
 
     @OneToMany(mappedBy = "author")
     @JsonIgnore
@@ -36,12 +39,13 @@ public class User {
     public User() {
     }
 
-    public User(long cnp,String username, String password, String role, String email) {
+    public User(long cnp,String username, String password, Role role, String email, double score) {
         this.cnp = cnp;
         this.username = username;
         this.password = password;
         this.role = role;
         this.email = email;
+        this.score = score;
     }
 
     public long getCnp() {
@@ -64,10 +68,10 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -76,5 +80,17 @@ public class User {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public double getscore() {
+        return score;
+    }
+
+    public void setscore(double score) {
+        this.score = score;
+    }
+
+    public void updateScore(double points) {
+        this.score += points;
     }
 }

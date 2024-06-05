@@ -41,18 +41,23 @@ export class SignupComponent {
       })
       .then(data => {
         console.log('Data:', data);
-        if(data == 200){
+        if (data.status === 200) {
+          // Assuming the backend returns the user data with the cnp
+          const userData = {
+            username: this.username,
+            password: this.password,
+            cnp: data.cnp, // Assuming the backend returns the cnp in the response
+            role: data.role
+          };
+          localStorage.setItem('user', JSON.stringify(userData));
           alert('User created successfully');
-          // Redirect to login page
           this.router.navigate(['/login']);
-        }
-        else{
+        } else {
           alert('Signup failed');
         }
       })
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
       });
-
   }
 }

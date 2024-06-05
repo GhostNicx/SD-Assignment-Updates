@@ -11,7 +11,7 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "author_id")
@@ -27,15 +27,23 @@ public class Question {
     @Column(name = "creation_date")
     private Date creationDate;
 
+    @Column(name = "question_score")
+    private int questionScore = 0;
+
+    @Column(name = "tag")
+    private String tag;
+
     public Question() {
     }
 
-    public Question(long id, User author, String title, String question, Date creationDate) {
+    public Question(long id, User author, String title, String question, Date creationDate, int questionScore, String tag) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.question = question;
         this.creationDate = creationDate;
+        this.questionScore = questionScore;
+        this.tag = tag;
     }
 
     public long getId() {
@@ -76,5 +84,32 @@ public class Question {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public int getQuestionScore() {
+        return questionScore;
+    }
+
+    public void setQuestionScore(int questionScore) {
+        this.questionScore = questionScore;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public void upvote() {
+        this.questionScore++;
+        author.updateScore(2.5); // add points for upvote
+    }
+
+    // downvote method
+    public void downvote() {
+        this.questionScore--;
+        author.updateScore(-1.5); // subtract points for downvote
     }
 }

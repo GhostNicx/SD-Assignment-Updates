@@ -1,0 +1,23 @@
+<h2>List of Users</h2>
+
+<p>Currently logged in: {{currentUser.username}}</p>
+
+<ul>
+  <li *ngFor="let user of users">
+    <p>User ID: {{ user.cnp }}</p>
+    <p>Name: {{ user.username }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Role: {{ user.role }}</p>
+  </li>
+</ul>
+
+<!-- Update user role form (visible only to admins) -->
+<form *ngIf="isAdmin()" (ngSubmit)="updateUserRole(updateForm)" #updateForm="ngForm">
+  <mat-form-field>
+    <input matInput placeholder="User CNP" name="cnp" ngModel required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="User Role" name="role" ngModel required>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">Update Role</button>
+</form>

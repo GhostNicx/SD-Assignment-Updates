@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,10 +7,10 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  username: string = ''; 
+  username: string = '';
   password: string = '';
 
-  constructor(private router: Router) {} 
+  constructor(private router: Router) {}
 
   backend_data: any;  // Variable to store data from backend
 
@@ -19,9 +19,9 @@ export class LoginComponent {
       username : this.username,
       password: this.password
     };
-    
+
     fetch( 'http://localhost:8080/user/login', {
-      method: 'POST', 
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'   },
       body: JSON.stringify(body)
@@ -38,9 +38,19 @@ export class LoginComponent {
         // Handle response data
         this.backend_data = data; // Store data to variable
         console.log('Data:', data);
-        if(data == 200){
-          localStorage.setItem('user', JSON.stringify({username: this.username, password: this.password}));
-          this.router.navigate(['/questions'], {replaceUrl: true});
+        if(data.status == 200){
+          const userData = {
+          username: this.username,
+          password: this.password,
+          cnp: data.cnp,
+          role : data.role
+          }
+          localStorage.setItem('user', JSON.stringify(userData));
+          if(data.role == 'ADMIN'){
+            this.router.navigate(['/admin'], {replaceUrl: true});
+          }else {
+            this.router.navigate(['/questions'], {replaceUrl: true});
+          }
         }else{
           alert('Invalid username or password');
         }

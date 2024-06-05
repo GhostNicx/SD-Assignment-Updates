@@ -29,15 +29,20 @@ public class Answer {
     @Column(name = "creation_date")
     private Date creationDate;
 
+    //answer score
+    @Column(name = "answer_score")
+    private int answerScore = 0;
+
     public Answer() {
     }
 
-    public Answer(long id, User author, Question question, String answer, Date creationDate) {
+    public Answer(long id, User author, Question question, String answer, Date creationDate, int answerScore) {
         this.id = id;
         this.author = author;
         this.question = question;
         this.answer = answer;
         this.creationDate = creationDate;
+        this.answerScore = answerScore;
     }
 
     public long getId() {
@@ -78,6 +83,25 @@ public class Answer {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public int getAnswerScore() {
+        return answerScore;
+    }
+
+    public void setAnswerScore(int answerScore) {
+        this.answerScore = answerScore;
+    }
+
+    public void upvote() {
+        this.answerScore++;
+        author.updateScore(5.0); // add points for upvote
+    }
+
+    // downvote method
+    public void downvote() {
+        this.answerScore--;
+        author.updateScore(-2.5); // subtract points for downvote
     }
 
 }

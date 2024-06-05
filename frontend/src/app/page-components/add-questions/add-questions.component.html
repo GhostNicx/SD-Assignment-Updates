@@ -1,1 +1,21 @@
-<p>add-questions works!</p>
+<div class="mx-2 my-2">
+  <mat-card>
+    <form class="d-flex align-center flex-column mb-2 d-flex flex-column align-center justify-center"
+          (ngSubmit)="addQuestion()" #questionForm="ngForm">
+      <h2>Add Question</h2>
+      <mat-form-field>
+        <input matInput appearance="outline" placeholder="Question Title" name="title" [(ngModel)]="formData.title">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput appearance="outline" placeholder="Question Tag" name="tag" [(ngModel)]="formData.tag">
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput appearance="outline" placeholder="Question Text" name="text" [(ngModel)]="formData.question"></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Add</button>
+    </form>
+    <div class="view-questions-link">
+      <a mat-button color="accent" routerLink="/questions">View My Questions</a>
+    </div>
+  </mat-card>
+</div>

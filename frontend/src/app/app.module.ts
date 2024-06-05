@@ -20,6 +20,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { AddQuestionsComponent } from './page-components/add-questions/add-questions.component';
 import { AddAnswersComponent } from './page-components/add-answers/add-answers.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AdminViewComponent } from './page-components/admin-view/admin-view.component';
+import{ CommonModule} from '@angular/common';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,9 @@ import { AddAnswersComponent } from './page-components/add-answers/add-answers.c
     QuestionsComponent,
     AnswersComponent,
     AddQuestionsComponent,
-    AddAnswersComponent
+    AddAnswersComponent,
+    AdminViewComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +50,10 @@ import { AddAnswersComponent } from './page-components/add-answers/add-answers.c
     MatMenuModule,
     MatIconModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSnackBarModule,
+    MatCardModule,
+    CommonModule
   ],
   providers: [
     provideClientHydration(),

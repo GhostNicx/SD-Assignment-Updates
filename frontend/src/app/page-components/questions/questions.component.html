@@ -1,36 +1,81 @@
+<div class="navclass" >
+  <mat-toolbar color="primary" class="navbar">
+    <button mat-icon-button [matMenuTriggerFor]= "appMenu" class="menu-button">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <img src=" assets/images/logo.png" class="nav-logo">
+    <span class="navbar-brand">
+        <span class="stack">Stack</span>
+        <span class="underflow">Underflow</span>
+        </span>
+    <span class="spacer"></span>
+
+    <!-- Dropdown menu -->
+    <mat-menu #appMenu="matMenu">
+      <button mat-menu-item routerLink="/home">
+        <i class="material-icons">home</i> Home
+      </button>
+      <button mat-menu-item routerLink="/add-questions">
+        <i class="material-icons">question_mark</i> Ask a Question
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</div>
+
 <div class="container">
+
   <h1>Questions Page</h1>
 
   <div>
-    {{ crtUser.username }}
+    Logged in as:{{ currentUser.username }}
   </div>
 
-  <!-- Form to add a new question -->
-  <form id="questionForm" class="d-flex flex-column">
-    <mat-form-field appearance="fill">
-      <mat-label>Question Title</mat-label>
-      <input matInput placeholder="Question Title" />
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      <mat-hint *ngIf>Hint</mat-hint>
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <mat-form-field appearance="outline">
+      <mat-label>Search by Tag</mat-label>
+      <input matInput [(ngModel)]="searchTag" placeholder="Enter tag to search">
     </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>questionDescription</mat-label>
-      <input matInput placeholder="Question Description" />
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      <mat-hint *ngIf>Hint</mat-hint>
-    </mat-form-field>
-  </form>
+    <button mat-raised-button color="primary" (click)="searchByTag()">Search</button>
+  </div>
 
   <!-- Displaying the questions -->
   <div *ngFor="let question of questions" class="question">
-    <h2>{{ question.title }}</h2>
-    <p class="user-info">User: {{crtUser.username}}  Posted on: {{formatedDate(question.creationDate)}}</p>
-    <p>{{ question.question }}</p>
-    <button (click)="toggleAnswer(question)">Show Answer</button>
-    <p class="answer" [style.display]="question.showAnswer ? 'block' : 'none'">
-      Answer: {{ question.answer }}
+    <h2 style="text-decoration: underline">{{ question.title }}</h2>
+    <p class="user-info"><strong>Posted by:</strong> {{question.authorUsername}}</p>
+    <p>Posted on: {{formatedDate(question.creationDate)}}</p>
+    <p><strong>Tag:</strong>{{question.tag}}</p>
+    <textarea class="question-detail" readonly>{{ question.question }}</textarea>
+    <p>
+      <button mat-icon-button (click)="upvoteQuestion(question.id)">
+      <i class="material-icons">thumb_up</i>
+      </button>
+      Score: {{ question.questionScore }}
+      <button mat-icon-button (click)="downvoteQuestion(question.id)">
+      <i class="material-icons">thumb_down</i>
+      </button>
+      <button mat-icon-button (click)="startUpdateQuestion(question)">
+        <i class="material-icons">edit</i>
+      </button>
+      <button mat-icon-button (click)="deleteQuestion(question.id)">
+        <i class="material-icons">delete</i>
+      </button>
     </p>
+  </div>
+
+  <!-- Update question form -->
+  <div *ngIf="isUpdating" class="update-form">
+    <h2>Update Question</h2>
+    <form (ngSubmit)="updateQuestion()" #updateForm="ngForm">
+      <mat-form-field>
+        <input matInput placeholder="Question Title" name="title" [(ngModel)]="updateData.title" required>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput placeholder="Question Text" name="text" [(ngModel)]="updateData.question" required></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="updateForm.invalid">Update</button>
+      <button mat-raised-button color="warn" type="button" (click)="cancelUpdate()">Cancel</button>
+    </form>
   </div>
 
 </div>

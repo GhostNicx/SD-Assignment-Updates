@@ -2,31 +2,36 @@
     max-width: 600px;
     margin: 0 auto;
   }
-  
+
   .question {
     margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
   }
-  
+
   .question h2 {
     margin-top: 0;
     margin-bottom: 10px;
   }
-  
+
   .question p {
     margin-bottom: 0;
   }
-  
+
   .answer {
     display: none;
     padding: 10px;
     background-color: #f9f9f9;
     border-radius: 5px;
   }
-  
+
   .question:hover .answer {
     display: block;
   }
-  
+
+  .nav-logo {
+        width: 40px; /* Adjust the width of the logo */
+        height: auto; /* Maintain aspect ratio */
+        margin-right: 10px; /* Add space between the logo and the navbar brand */
+    }

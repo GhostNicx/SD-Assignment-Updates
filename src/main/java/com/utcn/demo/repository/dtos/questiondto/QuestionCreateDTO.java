@@ -6,10 +6,13 @@ public class QuestionCreateDTO {
     private String question;
     private String title;
 
-    public QuestionCreateDTO(long user_id, String question, String title) {
+    private String tag;
+
+    public QuestionCreateDTO(long user_id, String question, String title, String tag) {
         this.user_id = user_id;
         this.question = question;
         this.title = title;
+        this.tag = tag;
     }
 
     public QuestionCreateDTO() {
@@ -37,5 +40,13 @@ public class QuestionCreateDTO {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

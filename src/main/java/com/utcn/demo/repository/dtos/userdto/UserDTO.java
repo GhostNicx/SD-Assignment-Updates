@@ -1,13 +1,15 @@
 package com.utcn.demo.repository.dtos.userdto;
 
+import com.utcn.demo.model.Role;
+
 public class UserDTO {
     private long cnp;
     private String username;
     private String password;
-    private String role;
+    private Role role;
     private String email;
 
-    public UserDTO(long cnp,String username, String password, String role, String email) {
+    public UserDTO(long cnp,String username, String password, Role role, String email) {
         this.cnp = cnp;
         this.username = username;
         this.password = password;
@@ -39,10 +41,10 @@ public class UserDTO {
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

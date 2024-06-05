@@ -1,33 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Q&A Page</title>
-  <link rel="stylesheet" href="answers.component.css">
-</head>
-<body>
+<div class="navclass" >
+  <mat-toolbar color="primary" class="navbar">
+    <button mat-icon-button [matMenuTriggerFor]= "appMenu" class="menu-button">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <img src=" assets/images/logo.png" class="nav-logo">
+    <span class="navbar-brand">
+        <span class="stack">Stack</span>
+        <span class="underflow">Underflow</span>
+        </span>
+    <span class="spacer"></span>
 
-  <div class="qa-container">
-    <div class="question">
-      <h2>Question 1</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit?</p>
-      <div class="answer">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
-    </div>
+    <!-- Dropdown menu -->
+    <mat-menu #appMenu="matMenu">
+      <button mat-menu-item routerLink="/home">
+        <i class="material-icons">home</i> Home
+      </button>
+      <button mat-menu-item routerLink="/questions">
+        <i class="material-icons">question_mark</i> View Questions
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</div>
 
-    <div class="question">
-      <h2>Question 2</h2>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat?</p>
-      <div class="answer">
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-      </div>
-    </div>
 
-    <!-- Add more questions and answers as needed -->
+<div class="container">
+  <h1>Answers Page</h1>
+
+  <div>
+    Logged in as: {{ currentUser.username }}
+  </div>
+
+  <!-- Displaying the answers -->
+<!--  {{ answers|json}}-->
+<div *ngIf="answers">
+
+  <p> it works</p>
+  <ng-template *ngFor="let answer of answers" class="answer">
+    <!--<h2 style="text-decoration: underline">Answer by: {{ currentUser.Username }}</h2>
+    <p>Posted on: {{ formatedDate(answer.creationDate) }}</p>
+    <p class="answer-detail">{{ answer.answer }}</p>
+    <p>
+      <button mat-icon-button (click)="upvoteAnswer(answer.id)">
+        <i class="material-icons">thumb_up</i>
+      </button>
+      Score: {{ answer.answerScore }}
+      <button mat-icon-button (click)="downvoteAnswer(answer.id)">
+        <i class="material-icons">thumb_down</i>
+      </button>
+      <button mat-icon-button (click)="startUpdateAnswer(answer)">
+        <i class="material-icons">edit</i>
+      </button>
+      <button mat-icon-button (click)="deleteAnswer(answer.id)">
+        <i class="material-icons">delete</i>
+      </button>
+    </p>-->
+
+    {{ answer|json}}
+    </ng-template>
 
   </div>
 
-</body>
-</html>
+  <!-- Update answer form -->
+  <div *ngIf="isUpdating" class="update-form">
+    <h2>Update Answer</h2>
+    <form (ngSubmit)="updateAnswer()" #updateForm="ngForm">
+      <mat-form-field>
+        <textarea matInput placeholder="Answer Text" name="text" [(ngModel)]="updateData.answer" required></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="updateForm.invalid">Update</button>
+      <button mat-raised-button color="warn" type="button" (click)="cancelUpdate()">Cancel</button>
+    </form>
+  </div>
+</div>

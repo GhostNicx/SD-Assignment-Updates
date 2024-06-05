@@ -4,6 +4,7 @@ import com.utcn.demo.model.Answer;
 import com.utcn.demo.model.Question;
 import com.utcn.demo.model.User;
 import com.utcn.demo.repository.dtos.answerdto.AnswerCreateDTO;
+import com.utcn.demo.repository.dtos.answerdto.AnswerDTO;
 import com.utcn.demo.repository.dtos.answerdto.AnswerUpdateDTO;
 import com.utcn.demo.service.AnswerService;
 import com.utcn.demo.service.QuestionService;
@@ -51,8 +52,8 @@ public class AnswerController {
     }
 
     @GetMapping("/getAll")
-    public List<Answer> retrieveAnswers() {
-        return answerService.retrieveAnswers();
+    public List<AnswerDTO> retrieveAnswersSorted() {
+        return answerService.retrieveAnswersSorted();
     }
 
     @GetMapping("/getByQuestion/{id}")
@@ -61,6 +62,14 @@ public class AnswerController {
         return answerService.retrieveAnswersByQuestion(question);
     }
 
-    
+    @PostMapping("/upvote/{id}")
+    public void upvoteAnswer(@PathVariable Long id) {
+        answerService.upvoteAnswer(id);
+    }
+
+    @PostMapping("/downvote/{id}")
+    public void downvoteAnswer(@PathVariable Long id) {
+        answerService.downvoteAnswer(id);
+    }
 
 }
